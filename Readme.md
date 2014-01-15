@@ -25,7 +25,17 @@ jQuery(function() {
     // on disappear callback
     console.log('peek-a...');
   });
-  
+ 
+  /**
+   * Or trigger them with offset option.
+   */
+    
+  $('.boxes').peekaboo({
+    onAppear: function() { ... },
+    onDisappear: function() { ... }.
+    offset: 200 // offset from the top/bottom of the window
+  });
+ 
   /**
    * peekaboo triggers appear or disappear events.
    */

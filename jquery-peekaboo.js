@@ -1,6 +1,6 @@
 
 /*!
- * jQuery Peekaboo 0.1.0
+ * jQuery Peekaboo 0.1.1
  *
  * @dependency jQuery 1.7+
  * @author Uniba Inc.
@@ -29,15 +29,17 @@
       els.push($(this)
         .on('appear', options.onAppear || $.noop)
         .on('disappear', options.onDisappear || $.noop)
+        .data('pkb-offset', options.offset || 0)
       );
     });
   };
   
   $window.on('scroll.peekaboo resize.peekaboo', function(e) {
     $.each(els, function() {
-      var $elem = this;
-      if ($window.scrollTop() < $elem.offset().top + $elem.height()
-        && $elem.offset().top < $window.scrollTop() + $window.height()) {
+      var $elem = this
+        , offset = $elem.data('pkb-offset');
+      if ($window.scrollTop() < $elem.offset().top + $elem.height() - offset
+        && $elem.offset().top < $window.scrollTop() + $window.height() - offset) {
         if ('appeared' !== $elem.data('pkb-state')) {
           $elem.data('pkb-state', 'appeared').trigger('appear', e);
         }
